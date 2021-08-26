@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<conio.h>
+#include<graphics.h>
+#include<dos.h>
+
+void main()
+{
+
+	int gd=DETECT, gm=0,i;
+	int r1=30,r2=35;
+	int r3=10;
+	int l1=0;
+	clrscr();
+	initgraph(&gd,&gm,"C:\\TURBOC3\\BGI");
+	cleardevice();
+	for(i=0;i<=100;i++){
+	cleardevice();
+	//wings
+
+	line(120+i*2,390-i,520-i*2,390-i);
+	line(120+i*2,390-i,320,399-i-l1);
+	line(520-i*2,390-i,320,399-i-l1);
+
+	//main body
+	setfillstyle(SOLID_FILL,WHITE);
+
+	ellipse(320,385-i,0,360,r1,r2);
+	if(i%10 == 0){
+		l1 =i/10;
+	}
+
+
+	if(i%5==0){
+	r1=r1-1*l1;
+	r2=r2-1*l1;
+	}
+
+	if(i<50){
+	floodfill(320,384-i,WHITE);
+	floodfill(320,395-i,WHITE);
+	floodfill(320,400-i,WHITE);
+	}
+
+	//tails
+	if(i<30){
+	line(320,320+i,320,385-i);
+	line(250+i*2,375-i,390-i*2,375-i);
+	}
+	//landing gear
+
+	if(i<20){
+	line(320,420-i,320,430-i*2);
+	line(270,397-i,270,430-i*2);
+	line(370,397-i,370,430-i*2);
+	ellipse(270,435-i*2,0,360,3,5);
+	ellipse(320,435-i*2,0,360,2,5);
+	ellipse(370,435-i*2,0,360,2,5);
+	}
+
+	//jets
+	circle(220+i,395-i,r3);
+	circle(420-i,395-i,r3);
+	if(i%10 == 0){
+	r3 = r3-1*l1;
+	}
+
+	delay(100);
+	}
+
+	getch();
+	closegraph();
+}
